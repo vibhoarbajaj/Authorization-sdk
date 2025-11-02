@@ -1,6 +1,6 @@
 package io.github.vibhoarbajaj.authz_sdk.factory;
 
-import io.github.vibhoarbajaj.authz_sdk.Utils.AuthorizationType;
+import io.github.vibhoarbajaj.authz_sdk.utils.AuthorizationType;
 import io.github.vibhoarbajaj.authz_sdk.strategies.AuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.JwtAuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.RoleBasedAuthorizationStrategy;
