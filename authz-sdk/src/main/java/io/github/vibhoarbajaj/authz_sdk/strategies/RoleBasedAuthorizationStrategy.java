@@ -10,4 +10,9 @@ public class RoleBasedAuthorizationStrategy implements AuthorizationStrategy {
         String role = request.getHeader("X-User-Role");
         return "ADMIN".equalsIgnoreCase(role);
     }
+
+    @Override
+    public String getName() {
+        return "";
+    }
 }

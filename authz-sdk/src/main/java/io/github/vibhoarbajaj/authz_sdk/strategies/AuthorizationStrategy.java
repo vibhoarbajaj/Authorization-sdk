@@ -4,4 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public interface AuthorizationStrategy {
     boolean authorize(HttpServletRequest request);
+
+    String getName();
 }

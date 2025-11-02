@@ -31,4 +31,9 @@ public class JwtAuthorizationStrategy implements AuthorizationStrategy {
             return false;
         }
     }
+
+    @Override
+    public String getName() {
+        return "";
+    }
 }
