@@ -1,6 +1,8 @@
 package io.github.vibhoarbajaj.authz_sdk.Utils;
 
 public enum AuthorizationType {
+    SPRING_SECURITY,
     JWT,
-    ROLE_BASED
+    API_KEY,
+    CUSTOM_HEADER
 }

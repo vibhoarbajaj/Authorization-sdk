@@ -15,8 +15,9 @@ public class AuthorizationManager {
 
     public boolean authorize(HttpServletRequest request) {
         for (AuthorizationStrategy strategy : strategies) {
-            if (!strategy.authorize(request)) {
-                return false;
+            Boolean result = strategy.authorize(request);
+            if (result != null) {
+                return result;
             }
         }
         return true;
