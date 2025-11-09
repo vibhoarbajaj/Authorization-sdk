@@ -1,29 +1,39 @@
 package io.github.vibhoarbajaj.authz_sdk.factory;
 
-import io.github.vibhoarbajaj.authz_sdk.Utils.AuthorizationType;
 import io.github.vibhoarbajaj.authz_sdk.strategies.AuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.JwtAuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.RoleBasedAuthorizationStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
+import static io.github.vibhoarbajaj.authz_sdk.utils.Constants.STRATEGIES;
 
 public class AuthorizationFactory {
 
-    public static List<AuthorizationStrategy> create(Set<AuthorizationType> types, Map<String, Object> configs) {
-        List<AuthorizationStrategy> strategies = new ArrayList<>();
+    private static final Map<String, AuthorizationStrategy> strategyRegistry = new HashMap<>();
 
-        for (AuthorizationType type : types) {
-            switch (type) {
-                case JWT -> {
-                    String keyUrl = (String) configs.getOrDefault("jwtPublicKeyUrl", "");
-                    strategies.add(new JwtAuthorizationStrategy(keyUrl));
-                }
-                case ROLE_BASED -> strategies.add(new RoleBasedAuthorizationStrategy());
-            }
+    public AuthorizationFactory() {
+        initializeStrategies();
+    }
+
+    public static List<AuthorizationStrategy> create(Map<String, Object> configs, Set<String> strategies) {
+        if (strategies == null || strategies.isEmpty()) {
+            throw new IllegalArgumentException(STRATEGIES + " is null");
         }
-        return strategies;
+        List<AuthorizationStrategy> authorizationStrategies = new ArrayList<>();
+        for (String key : strategies) {
+            authorizationStrategies.add(strategyRegistry.get(key.toUpperCase(Locale.ROOT)));
+        }
+        return authorizationStrategies;
+    }
+
+    private void initializeStrategies() {
+        List<AuthorizationStrategy> strategies = List.of(
+                new JwtAuthorizationStrategy(),
+                new RoleBasedAuthorizationStrategy()
+        );
+        for (AuthorizationStrategy strategy : strategies) {
+            strategyRegistry.put(strategy.getName().toUpperCase(Locale.ROOT), strategy);
+        }
     }
 }
