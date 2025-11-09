@@ -1,6 +1,7 @@
 package io.github.vibhoarbajaj.authz_sdk.strategies;
 
 import com.nimbusds.jwt.SignedJWT;
+import io.github.vibhoarbajaj.authz_sdk.utils.AuthorizationType;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.text.ParseException;
@@ -11,7 +12,7 @@ public class JwtAuthorizationStrategy implements AuthorizationStrategy {
     public boolean authorize(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
+            return false;
         }
         try {
             String token = authHeader.substring(7);
@@ -23,7 +24,7 @@ public class JwtAuthorizationStrategy implements AuthorizationStrategy {
             }
 
             if (role == null) {
-                return null;
+                return false;
             }
 
             return role.equalsIgnoreCase("ADMIN") || role.equalsIgnoreCase("USER");
@@ -34,6 +35,6 @@ public class JwtAuthorizationStrategy implements AuthorizationStrategy {
 
     @Override
     public String getName() {
-        return "";
+        return AuthorizationType.JWT.name();
     }
 }

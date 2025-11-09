@@ -3,20 +3,21 @@ package io.github.vibhoarbajaj.authz_sdk.utils;
 import java.util.Map;
 import java.util.Set;
 
+
 public class AuthorizationConfig {
-    private Set<AuthorizationType> enabledAuthTypes;
     private Map<String, Object> configValues;
+    private Set<String> strategies;
 
-    public AuthorizationConfig(Set<AuthorizationType> enabledAuthTypes, Map<String, Object> configValues) {
-        this.enabledAuthTypes = enabledAuthTypes;
+    public AuthorizationConfig(Map<String, Object> configValues, Set<String> strategies) {
         this.configValues = configValues;
-    }
-
-    public Set<AuthorizationType> getEnabledAuthTypes() {
-        return enabledAuthTypes;
+        this.strategies = strategies;
     }
 
     public Map<String, Object> getConfigValues() {
         return configValues;
+    }
+
+    public Set<String> getStrategies() {
+        return strategies;
     }
 }

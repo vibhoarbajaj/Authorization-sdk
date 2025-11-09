@@ -16,7 +16,7 @@ public class AuthorizationBuilder {
 
     public AuthorizationManager build() {
         return new AuthorizationManager(
-                AuthorizationFactory.create(config.getEnabledAuthTypes(), config.getConfigValues())
+                AuthorizationFactory.create(config.getConfigValues(), config.getStrategies())
         );
     }
 }

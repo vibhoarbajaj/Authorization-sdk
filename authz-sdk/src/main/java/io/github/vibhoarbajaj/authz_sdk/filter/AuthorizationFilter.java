@@ -29,7 +29,6 @@ public class AuthorizationFilter implements Filter {
             res.getWriter().write("Access Denied");
             return;
         }
-
         chain.doFilter(request, response);
     }
 }
