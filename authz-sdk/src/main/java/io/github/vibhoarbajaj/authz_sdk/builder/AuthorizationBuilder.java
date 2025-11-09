@@ -15,8 +15,13 @@ public class AuthorizationBuilder {
     }
 
     public AuthorizationManager build() {
+        initFactory();
         return new AuthorizationManager(
                 AuthorizationFactory.create(config.getConfigValues(), config.getStrategies())
         );
+    }
+
+    private void initFactory() {
+        new AuthorizationFactory();
     }
 }

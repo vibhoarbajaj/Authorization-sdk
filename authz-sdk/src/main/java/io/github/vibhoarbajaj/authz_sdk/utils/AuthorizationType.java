@@ -5,5 +5,7 @@ public enum AuthorizationType {
     JWT,
     API_KEY,
     CUSTOM_HEADER,
-    ROLE_BASED
+    ROLE_BASED,
+    HMAC,
+    IP_BASED
 }

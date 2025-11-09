@@ -3,7 +3,6 @@ package io.github.vibhoarbajaj.authz_sdk.factory;
 import io.github.vibhoarbajaj.authz_sdk.strategies.AuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.JwtAuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.RoleBasedAuthorizationStrategy;
-import io.github.vibhoarbajaj.authz_sdk.utils.AuthorizationType;
 
 import java.util.*;
 
@@ -13,11 +12,11 @@ public class AuthorizationFactory {
 
     private static final Map<String, AuthorizationStrategy> strategyRegistry = new HashMap<>();
 
-    AuthorizationFactory() {
+    public AuthorizationFactory() {
         initializeStrategies();
     }
 
-    public static List<AuthorizationStrategy> create( Map<String, Object> configs, Set<String> strategies) {
+    public static List<AuthorizationStrategy> create(Map<String, Object> configs, Set<String> strategies) {
         if (strategies == null || strategies.isEmpty()) {
             throw new IllegalArgumentException(STRATEGIES + " is null");
         }
