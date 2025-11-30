@@ -25,8 +25,8 @@ public class AuthorizationFilter implements Filter {
 
         boolean authorized = manager.authorize(req);
         if (!authorized) {
-            res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            res.getWriter().write("Access Denied");
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.getWriter().write("Access Denied because you are not authorized for performing this request");
             return;
         }
         chain.doFilter(request, response);
