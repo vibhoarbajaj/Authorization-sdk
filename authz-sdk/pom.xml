@@ -13,7 +13,7 @@
 
     <groupId>io.github.vibhoarbajaj</groupId>
     <artifactId>authz-sdk</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
     <name>Authorization SDK</name>
     <description>Lightweight Java SDK for authorization with pluggable strategies</description>
 
