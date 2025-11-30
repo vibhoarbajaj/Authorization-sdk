@@ -1,6 +1,6 @@
 package io.github.vibhoarbajaj.authz_sdk.strategies;
 
-import io.github.vibhoarbajaj.authz_sdk.utils.AuthorizationType;
+import io.github.vibhoarbajaj.authz_sdk.models.AuthorizationType;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class RoleBasedAuthorizationStrategy implements AuthorizationStrategy {

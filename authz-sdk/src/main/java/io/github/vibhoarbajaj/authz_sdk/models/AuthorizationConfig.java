@@ -1,4 +1,4 @@
-package io.github.vibhoarbajaj.authz_sdk.utils;
+package io.github.vibhoarbajaj.authz_sdk.models;
 
 import java.util.Map;
 import java.util.Set;

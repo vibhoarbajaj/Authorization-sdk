@@ -1,5 +1,6 @@
 package io.github.vibhoarbajaj.authz_sdk.factory;
 
+import io.github.vibhoarbajaj.authz_sdk.strategies.ApiKeyAuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.AuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.JwtAuthorizationStrategy;
 import io.github.vibhoarbajaj.authz_sdk.strategies.RoleBasedAuthorizationStrategy;
@@ -12,11 +13,11 @@ public class AuthorizationFactory {
 
     private static final Map<String, AuthorizationStrategy> strategyRegistry = new HashMap<>();
 
-    public AuthorizationFactory() {
-        initializeStrategies();
+    public AuthorizationFactory(Map<String, Object> configs) {
+        initializeStrategies(configs);
     }
 
-    public static List<AuthorizationStrategy> create(Map<String, Object> configs, Set<String> strategies) {
+    public static List<AuthorizationStrategy> create(Set<String> strategies) {
         if (strategies == null || strategies.isEmpty()) {
             throw new IllegalArgumentException(STRATEGIES + " is null");
         }
@@ -27,10 +28,14 @@ public class AuthorizationFactory {
         return authorizationStrategies;
     }
 
-    private void initializeStrategies() {
+    // initializing all before start because service might want to use a strategy at runtime ,
+    // could give more thought on this for performance
+    private void initializeStrategies(Map<String, Object> configs) {
         List<AuthorizationStrategy> strategies = List.of(
                 new JwtAuthorizationStrategy(),
-                new RoleBasedAuthorizationStrategy()
+                new RoleBasedAuthorizationStrategy(),
+                new ApiKeyAuthorizationStrategy(configs)
+
         );
         for (AuthorizationStrategy strategy : strategies) {
             strategyRegistry.put(strategy.getName().toUpperCase(Locale.ROOT), strategy);

@@ -1,9 +1,11 @@
 package io.github.vibhoarbajaj.authz_sdk.builder;
 
 
-import io.github.vibhoarbajaj.authz_sdk.utils.AuthorizationConfig;
 import io.github.vibhoarbajaj.authz_sdk.factory.AuthorizationFactory;
 import io.github.vibhoarbajaj.authz_sdk.manager.AuthorizationManager;
+import io.github.vibhoarbajaj.authz_sdk.models.AuthorizationConfig;
+
+import java.util.Map;
 
 public class AuthorizationBuilder {
 
@@ -15,13 +17,13 @@ public class AuthorizationBuilder {
     }
 
     public AuthorizationManager build() {
-        initFactory();
+        initFactory(config.getConfigValues());
         return new AuthorizationManager(
-                AuthorizationFactory.create(config.getConfigValues(), config.getStrategies())
+                AuthorizationFactory.create(config.getStrategies())
         );
     }
 
-    private void initFactory() {
-        new AuthorizationFactory();
+    private void initFactory(Map<String, Object> configs) {
+        new AuthorizationFactory(configs);
     }
 }

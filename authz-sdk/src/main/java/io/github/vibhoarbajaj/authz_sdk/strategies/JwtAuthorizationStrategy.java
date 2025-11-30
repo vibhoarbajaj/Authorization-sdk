@@ -1,7 +1,7 @@
 package io.github.vibhoarbajaj.authz_sdk.strategies;
 
 import com.nimbusds.jwt.SignedJWT;
-import io.github.vibhoarbajaj.authz_sdk.utils.AuthorizationType;
+import io.github.vibhoarbajaj.authz_sdk.models.AuthorizationType;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.text.ParseException;
