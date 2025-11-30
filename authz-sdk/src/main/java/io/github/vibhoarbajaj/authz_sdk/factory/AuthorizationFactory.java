@@ -1,9 +1,6 @@
 package io.github.vibhoarbajaj.authz_sdk.factory;
 
-import io.github.vibhoarbajaj.authz_sdk.strategies.ApiKeyAuthorizationStrategy;
-import io.github.vibhoarbajaj.authz_sdk.strategies.AuthorizationStrategy;
-import io.github.vibhoarbajaj.authz_sdk.strategies.JwtAuthorizationStrategy;
-import io.github.vibhoarbajaj.authz_sdk.strategies.RoleBasedAuthorizationStrategy;
+import io.github.vibhoarbajaj.authz_sdk.strategies.*;
 
 import java.util.*;
 
@@ -34,7 +31,8 @@ public class AuthorizationFactory {
         List<AuthorizationStrategy> strategies = List.of(
                 new JwtAuthorizationStrategy(),
                 new RoleBasedAuthorizationStrategy(),
-                new ApiKeyAuthorizationStrategy(configs)
+                new ApiKeyAuthorizationStrategy(configs),
+                new IpBasedAuthorizationStrategy(configs)
 
         );
         for (AuthorizationStrategy strategy : strategies) {
