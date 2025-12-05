@@ -1,4 +1,4 @@
-Authorization SDK Integration Guide
+## Authorization SDK Integration Guide
 
 This guide explains how to integrate the authz-sdk into a Spring Boot application using the latest version of the dependency. You will configure the AuthorizationManager, register an AuthorizationFilter, and protect API endpoints.
 
