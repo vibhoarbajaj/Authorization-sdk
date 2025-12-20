@@ -17,11 +17,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class JwtAuthorizationStrategy implements AuthorizationStrategy {
 
-    private Map<String, Object> configs;
     private Map<String, Object> keyMap = new ConcurrentHashMap<>();
 
     public JwtAuthorizationStrategy(Map<String, Object> configs) {
-        this.configs = configs;
         loadKeysFromConfig(configs);
     }
 
@@ -50,8 +48,7 @@ public class JwtAuthorizationStrategy implements AuthorizationStrategy {
             Date exp = jwt.getJWTClaimsSet().getExpirationTime();
             if (exp == null || exp.toInstant().isBefore(Instant.now())) return false;
 
-            if (!verifyBasedOnHeader(jwt)) return false;
-            return true;
+            return verifyBasedOnHeader(jwt);
 
         } catch (Exception e) {
             return false;
@@ -71,7 +68,7 @@ public class JwtAuthorizationStrategy implements AuthorizationStrategy {
             return jwt.verify(new MACVerifier(secret));
         }
 
-        return false;
+        return true;
     }
 
     @Override

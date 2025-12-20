@@ -16,7 +16,7 @@ public class AuthorizationFactory {
 
     public static List<AuthorizationStrategy> create(Set<String> strategies) {
         if (strategies == null || strategies.isEmpty()) {
-            throw new IllegalArgumentException(STRATEGIES + " is null");
+            throw new IllegalArgumentException(STRATEGIES + " are null");
         }
         List<AuthorizationStrategy> authorizationStrategies = new ArrayList<>();
         for (String key : strategies) {
@@ -29,7 +29,7 @@ public class AuthorizationFactory {
     // could give more thought on this for performance
     private void initializeStrategies(Map<String, Object> configs) {
         List<AuthorizationStrategy> strategies = List.of(
-                new JwtAuthorizationStrategy(),
+                new JwtAuthorizationStrategy(configs),
                 new RoleBasedAuthorizationStrategy(),
                 new ApiKeyAuthorizationStrategy(configs),
                 new IpBasedAuthorizationStrategy(configs)
