@@ -4,7 +4,7 @@ import io.github.vibhoarbajaj.authz_sdk.strategies.*;
 
 import java.util.*;
 
-import static io.github.vibhoarbajaj.authz_sdk.utils.Constants.STRATEGIES;
+
 
 public class AuthorizationFactory {
 
@@ -15,9 +15,6 @@ public class AuthorizationFactory {
     }
 
     public static List<AuthorizationStrategy> create(Set<String> strategies) {
-        if (strategies == null || strategies.isEmpty()) {
-            throw new IllegalArgumentException(STRATEGIES + " are null");
-        }
         List<AuthorizationStrategy> authorizationStrategies = new ArrayList<>();
         for (String key : strategies) {
             authorizationStrategies.add(strategyRegistry.get(key.toUpperCase(Locale.ROOT)));
