@@ -4,7 +4,10 @@ package io.github.vibhoarbajaj.authz_sdk.builder;
 import io.github.vibhoarbajaj.authz_sdk.factory.AuthorizationFactory;
 import io.github.vibhoarbajaj.authz_sdk.manager.AuthorizationManager;
 import io.github.vibhoarbajaj.authz_sdk.models.AuthorizationConfig;
+import io.github.vibhoarbajaj.authz_sdk.models.StrategyRegistry;
+import io.github.vibhoarbajaj.authz_sdk.strategies.AuthorizationStrategy;
 
+import java.util.List;
 import java.util.Map;
 
 public class AuthorizationBuilder {
@@ -17,10 +20,11 @@ public class AuthorizationBuilder {
     }
 
     public AuthorizationManager build() {
-        initFactory(config.getConfigValues());
-        return new AuthorizationManager(
-                AuthorizationFactory.create(config.getStrategies())
-        );
+        List<AuthorizationStrategy> strategies =
+                config.getStrategies().stream()
+                        .map(s -> StrategyRegistry.create(s, config.getConfigValues()))
+                        .toList();
+        return new AuthorizationManager(strategies);
     }
 
     private void initFactory(Map<String, Object> configs) {
