@@ -18,7 +18,7 @@ public class AuthorizationBuilder {
         this.config = config;
         return this;
     }
-
+    this is a test error
     public AuthorizationManager build() {
         List<AuthorizationStrategy> strategies =
                 config.getStrategies().stream()
